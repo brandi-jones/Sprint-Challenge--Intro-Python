@@ -75,8 +75,34 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
   within = []
 
+
+  # latLonSquare = []
+  # latLonSquare.append((lat1, lon1)) #user entered point 1
+  # latLonSquare.append((lat2, lon2)) #user entered point 2
+  # latLonSquare.append((lat1, lon2)) #created point to create square
+  # latLonSquare.append((lat2, lon1)) #created point to create square
+
+  #create max/min values to use later when determining if city in cities list is in the lat/lon square
+  maxLat = lat2
+  minLat = lat1
+  maxLon = lon2
+  minLon = lon1
+
+  #reassign max/min values if lat1 is greater than lat2
+  if lat1 > lat2:
+    maxLat = lat1
+    minLat = lat2
+
+  #reassign max/min values if lon2 is greater than lat2
+  if lon1 > lon2:
+    maxLon = lon1
+    minLon = lon2
+
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
-
+  for city in cities:
+    if city.lat > minLat and city.lat < maxLat:
+      if city.lon > minLon and city.lon < maxLon:
+        within.append(city)
   return within
